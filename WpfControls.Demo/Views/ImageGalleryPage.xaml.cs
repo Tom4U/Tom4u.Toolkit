@@ -84,7 +84,7 @@ namespace WpfControls.Demo.Views
         {
             var assembly = Assembly.GetExecutingAssembly();
             var path = Path.GetDirectoryName(assembly.CodeBase) ?? string.Empty;
-            var filePath = Path.Combine(path, "Images", "DummyImage.png");
+            var filePath = Path.Combine(path, "ImageGallery", "DummyImage.png");
             var viewModel = new ImageViewModel
             {
                 Title = imageTitle,
