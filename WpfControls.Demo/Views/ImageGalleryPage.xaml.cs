@@ -1,30 +1,34 @@
-﻿using System;
+﻿// Tom4u.Toolkit
+// Copyright (C) 2020  Thomas Ohms
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Tom4u.Toolkit.WpfControls.Images;
-using Path = System.IO.Path;
+using Tom4u.Toolkit.WpfControls.ImageGallery;
 
 namespace WpfControls.Demo.Views
 {
-    public partial class ImageGalleryPage : Page
+    public partial class ImageGalleryPage
     {
         public ImageGalleryPage()
         {
             InitializeComponent();
-            var gallery = new ImageGalleryView(GetSimulatedViewModel());
+            ImageGalleryView gallery = new ImageGalleryView(GetSimulatedViewModel());
             gallery.ImageClicked += ImageGalleryView_OnImageClicked;
             gallery.GalleryClosed += ImageGalleryView_OnGalleryClosed;
             MainGrid.Children.Add(gallery);
@@ -37,43 +41,51 @@ namespace WpfControls.Demo.Views
 
         private void ImageGalleryView_OnGalleryClosed(object sender, EventArgs e)
         {
-            if (NavigationService == null || !NavigationService.CanGoBack) return;
+            if (NavigationService == null || !NavigationService.CanGoBack)
+            {
+                return;
+            }
 
             NavigationService?.GoBack();
         }
 
         private static ImageGalleryViewModel GetSimulatedViewModel()
         {
-            var viewModel = new ImageGalleryViewModel();
+            ImageGalleryViewModel viewModel = new ImageGalleryViewModel();
 
-            for (var i = 1; i < 3; i++)
+            for (int i = 1; i < 3; i++)
+            {
                 viewModel.Categories.Add(GetSimulatedCategory($"Category {i}", viewModel.CurrentThumbnailSize));
+            }
 
             return viewModel;
         }
 
         private static ImagesCategoryViewModel GetSimulatedCategory(string categoryName, int defaultImageSize)
         {
-            var viewModel = new ImagesCategoryViewModel { CategoryName = categoryName };
-            var images = new List<ImageViewModel>();
+            ImagesCategoryViewModel viewModel = new ImagesCategoryViewModel { CategoryName = categoryName };
+            List<ImageViewModel> images = new List<ImageViewModel>();
 
-            for (var i = 1; i < 10; i++)
+            for (int i = 1; i < 10; i++)
             {
-                var image = GetSimulatedImage(defaultImageSize, $"Image{i}");
+                ImageViewModel image = GetSimulatedImage(defaultImageSize, $"Image{i}");
                 images.Add(image);
             }
 
-            viewModel.Images = new ObservableCollection<ImageViewModel>(images);
+            foreach (ImageViewModel image in images)
+            {
+                viewModel.Images.Add(image);
+            }
 
             return viewModel;
         }
 
         private static ImageViewModel GetSimulatedImage(int defaultSize, string imageTitle)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var path = System.IO.Path.GetDirectoryName(assembly.CodeBase) ?? string.Empty;
-            var filePath = Path.Combine(path, "Images", "DummyImage.png");
-            var viewModel = new ImageViewModel()
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string path = Path.GetDirectoryName(assembly.CodeBase) ?? string.Empty;
+            string filePath = Path.Combine(path, "Images", "DummyImage.png");
+            ImageViewModel viewModel = new ImageViewModel
             {
                 Title = imageTitle,
                 ImageSize = defaultSize,

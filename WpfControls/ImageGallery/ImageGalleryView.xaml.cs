@@ -1,46 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Tom4u.Toolkit
+// Copyright (C) 2020  Thomas Ohms
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
 
-namespace Tom4u.Toolkit.WpfControls.Images
+namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
-    public partial class ImageGalleryView : UserControl
+    public partial class ImageGalleryView
     {
-        public event EventHandler GalleryClosed; 
-        public event EventHandler<ImageViewModel> ImageClicked; 
-
-        public ImageGalleryViewModel ViewModel { get; set; }
-
-        public int DialogWidth
-        {
-            get
-            {
-                var parentWidth = GalleryDialogHost.ActualWidth;
-                return (int) (parentWidth - 150);
-            }
-        }
-
-        public int DialogHeight
-        {
-            get
-            {
-                var parentHeight = GalleryDialogHost.ActualHeight;
-                return (int)(parentHeight - 200);
-            }
-        }
-
         public ImageGalleryView()
         {
             SetupView(new ImageGalleryViewModel());
@@ -50,6 +33,29 @@ namespace Tom4u.Toolkit.WpfControls.Images
         {
             SetupView(viewModel);
         }
+
+        private ImageGalleryViewModel ViewModel { get; set; }
+
+        private int DialogWidth
+        {
+            get
+            {
+                var parentWidth = GalleryDialogHost.ActualWidth;
+                return (int)(parentWidth - 150);
+            }
+        }
+
+        private int DialogHeight
+        {
+            get
+            {
+                var parentHeight = GalleryDialogHost.ActualHeight;
+                return (int)(parentHeight - 200);
+            }
+        }
+
+        public event EventHandler GalleryClosed;
+        public event EventHandler<ImageViewModel> ImageClicked;
 
         private void SetupView(ImageGalleryViewModel viewModel)
         {
@@ -72,11 +78,14 @@ namespace Tom4u.Toolkit.WpfControls.Images
 
         private void CategoriesTabControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (CategoriesTabControl.Items.Count > 0) return;
+            if (CategoriesTabControl.Items.Count > 0)
+            {
+                return;
+            }
 
             foreach (var category in ViewModel.Categories)
             {
-                var tabItem = new TabItem()
+                var tabItem = new TabItem
                 {
                     Header = category.CategoryName,
                     Content = new ImagesCategoryView(category)
@@ -92,7 +101,10 @@ namespace Tom4u.Toolkit.WpfControls.Images
 
         private void Slider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (ViewModel == null) return;
+            if (ViewModel == null)
+            {
+                return;
+            }
 
             foreach (var category in ViewModel.Categories)
             {
@@ -107,11 +119,12 @@ namespace Tom4u.Toolkit.WpfControls.Images
         {
             var source = e.OriginalSource as FrameworkElement;
 
-            if (source?.DataContext == null) return;
+            if (!(source?.DataContext is ImageViewModel))
+            {
+                return;
+            }
 
-            if (!(source.DataContext is ImageViewModel)) return;
-
-            ImageClicked?.Invoke(this, (ImageViewModel) source.DataContext);
+            ImageClicked?.Invoke(this, (ImageViewModel)source.DataContext);
         }
     }
 }

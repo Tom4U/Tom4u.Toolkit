@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfControls.Demo"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -11,12 +10,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button 
-            Name="OpenGalleryWindow" 
-            Height="30" 
-            FontSize="20" 
-            VerticalAlignment="Top" 
-            Click="OpenGalleryWindow_OnClick">Image Gallery</Button>
-        <Frame Name="ElementsFrame" Grid.Row="1"></Frame>
+        <Button
+            Name="OpenGalleryWindow"
+            Height="30"
+            FontSize="20"
+            VerticalAlignment="Top"
+            Click="OpenGalleryWindow_OnClick">
+            Image Gallery
+        </Button>
+        <Frame Name="ElementsFrame" Grid.Row="1" />
     </Grid>
 </Window>
