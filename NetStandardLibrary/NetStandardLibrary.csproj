@@ -10,7 +10,7 @@
     <Copyright>Copyright ©  2020 Thomas Ohms</Copyright>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <NeutralLanguage>de</NeutralLanguage>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Default.snk</AssemblyOriginatorKeyFile>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>

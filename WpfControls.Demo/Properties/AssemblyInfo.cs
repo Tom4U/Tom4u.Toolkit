@@ -15,19 +15,18 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 using System.Windows;
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("Tom's Toolkit WPF Controls")]
-[assembly: AssemblyDescription("WPF Controls for .NET Framework")]
+[assembly: AssemblyTitle("WpfControls.Demo")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Thomas Ohms")]
-[assembly: AssemblyProduct("Tom's Toolkit")]
-[assembly: AssemblyCopyright("Copyright ©  2020 Thomas Ohms")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("WpfControls.Demo")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -68,4 +67,3 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguage("de")]
