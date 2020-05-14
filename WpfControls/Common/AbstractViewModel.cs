@@ -14,16 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using ReactiveUI;
-using Tom4u.Toolkit.WpfControls.Properties;
 
 namespace Tom4u.Toolkit.WpfControls.Common
 {
     public abstract class AbstractViewModel : ReactiveObject
     {
-        
     }
 }

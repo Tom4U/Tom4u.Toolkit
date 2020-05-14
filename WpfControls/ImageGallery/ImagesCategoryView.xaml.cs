@@ -14,10 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Diagnostics;
-using System.Linq;
 using System.Reactive.Disposables;
-using System.Windows;
 using ReactiveUI;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery
@@ -28,7 +25,7 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
         //    nameof(ViewModel),
         //    typeof(ImagesCategoryViewModel),
         //    typeof(ImagesCategoryView));
-        
+
         //public ImagesCategoryViewModel ViewModel
         //{
         //    get => (ImagesCategoryViewModel)GetValue(ViewModelProperty);

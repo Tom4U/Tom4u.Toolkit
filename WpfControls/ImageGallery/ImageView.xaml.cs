@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Reactive.Disposables;
-using System.Windows;
 using ReactiveUI;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery

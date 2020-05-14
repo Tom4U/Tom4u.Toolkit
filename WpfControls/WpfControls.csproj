@@ -115,6 +115,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="WpfControls.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="ImageGallery\ImageGalleryView.xaml">
@@ -167,4 +168,7 @@
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>..\.nuget\nuget.exe pack</PostBuildEvent>
+  </PropertyGroup>
 </Project>

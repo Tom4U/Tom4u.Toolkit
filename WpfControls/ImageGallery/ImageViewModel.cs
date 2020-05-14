@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Reactive;
-using System.Windows.Input;
 using ReactiveUI;
 using Tom4u.Toolkit.WpfControls.Common;
 
@@ -23,28 +22,31 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public class ImageViewModel : AbstractViewModel
     {
+        private int imageSize = 150;
+
+        private string path = "";
+
+        private string tags = "";
         private string title = "";
+
         public string Title
         {
             get => title;
             set => this.RaiseAndSetIfChanged(ref title, value);
         }
 
-        private string path = "";
         public string Path
         {
             get => path;
             set => this.RaiseAndSetIfChanged(ref path, value);
         }
 
-        private string tags = "";
         public string Tags
         {
             get => tags;
             set => this.RaiseAndSetIfChanged(ref tags, value);
         }
 
-        private int imageSize = 150;
         public int ImageSize
         {
             get => imageSize;

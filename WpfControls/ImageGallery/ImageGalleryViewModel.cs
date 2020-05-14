@@ -15,13 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Input;
 using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
@@ -31,24 +26,8 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public class ImageGalleryViewModel : AbstractViewModel
     {
-        private int maxThumbnailSize = 500;
-        public int MaxThumbnailSize
-        {
-            get => maxThumbnailSize;
-            set => this.RaiseAndSetIfChanged(ref maxThumbnailSize, value);
-        }
-
         private int currentThumbnailSize = 120;
-        public int CurrentThumbnailSize
-        {
-            get => currentThumbnailSize;
-            set => this.RaiseAndSetIfChanged(ref currentThumbnailSize, value);
-        }
-
-        private SourceCache<ImagesCategoryViewModel, string> CategoriesCache { get; }
-        public IObservableCollection<ImagesCategoryViewModel> Categories { get; }
-
-        public ReactiveCommand<Unit, Unit> CloseGallery { get; }
+        private int maxThumbnailSize = 500;
 
         public ImageGalleryViewModel()
         {
@@ -60,7 +39,24 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
                 .Bind(Categories)
                 .Subscribe();
 
-            CloseGallery = ReactiveCommand.Create(() => {});
+            CloseGallery = ReactiveCommand.Create(() => { });
         }
+
+        public int MaxThumbnailSize
+        {
+            get => maxThumbnailSize;
+            set => this.RaiseAndSetIfChanged(ref maxThumbnailSize, value);
+        }
+
+        public int CurrentThumbnailSize
+        {
+            get => currentThumbnailSize;
+            set => this.RaiseAndSetIfChanged(ref currentThumbnailSize, value);
+        }
+
+        private SourceCache<ImagesCategoryViewModel, string> CategoriesCache { get; }
+        public IObservableCollection<ImagesCategoryViewModel> Categories { get; }
+
+        public ReactiveCommand<Unit, Unit> CloseGallery { get; }
     }
 }

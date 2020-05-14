@@ -25,21 +25,6 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public class EmptyStringImageSourceConverter : IValueConverter, IBindingTypeConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!(value is string))
-            {
-                return value;
-            }
-
-            return string.IsNullOrWhiteSpace(value.ToString()) ? DependencyProperty.UnsetValue : value;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Binding.DoNothing;
-        }
-
         public int GetAffinityForObjects(Type fromType, Type toType)
         {
             return fromType == typeof(string) ? 0 : 1;
@@ -59,6 +44,18 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
             }
 
             return true;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is string)) return value;
+
+            return string.IsNullOrWhiteSpace(value.ToString()) ? DependencyProperty.UnsetValue : value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Binding.DoNothing;
         }
     }
 }

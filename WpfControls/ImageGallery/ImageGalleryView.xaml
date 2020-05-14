@@ -22,57 +22,56 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Name="GalleryPanel">
-                    <DockPanel Margin="10 0 0 0" Height="60" Name="ActionDock">
-                        <Grid VerticalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition MinWidth="200" />
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Static strings:Labels.PreviewSize}" FontSize="20" Margin="0 -8 15 0"
-                                       HorizontalAlignment="Center" />
-                            <Slider Name="SliderControl"
-                                Grid.Column="1"
-                                Orientation="Horizontal"
-                                TickFrequency="10"
-                                Minimum="10"
-                                ValueChanged="Slider_OnValueChanged" />
-                            <TextBox Name="CurrentThumbnailSizeControl"
-                                Grid.Column="2"
-                                HorizontalAlignment="Center"
-                                FontSize="20"
-                                VerticalAlignment="Top"
-                                Margin="0 -15 0 0" />
-                            <Button Name="CloseButton"
-                                Grid.Column="3"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Margin="0 -20 0 0"
-                                Cursor="Hand"
-                                ToolTip="{x:Static strings:Labels.Close}"
-                                Content="{materialDesign:PackIcon Close}" />
-                        </Grid>
-                    </DockPanel>
-                    <TabControl Name="CategoriesTabControl"
-                                common:TabContent.IsCached="True"
-                                Style="{StaticResource MaterialDesignTabControl}"
-                                MouseUp="CategoriesTabControl_OnMouseUp"
-                                SizeChanged="CategoriesTabControl_OnSizeChanged"
-                                SelectionChanged="CategoriesTabControl_OnSelectionChanged"
-                                SelectedIndex="0"
-                                >
-                        <TabControl.ItemTemplate>
-                            <DataTemplate DataType="imageGallery:ImagesCategoryViewModel">
-                                <TextBlock Text="{Binding CategoryName}" Loaded="TabItemHeaderTextBlock_OnLoaded" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <common:TabContent.Template>
-                            <DataTemplate DataType="imageGallery:ImagesCategoryViewModel">
-                                <reactiveUi:ViewModelViewHost ViewModel="{Binding}" HorizontalContentAlignment="Stretch" />
-                            </DataTemplate>
-                        </common:TabContent.Template>
-                    </TabControl>
-                </StackPanel>
+            <DockPanel Margin="10 0 0 0" Height="60" Name="ActionDock">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition MinWidth="200" />
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Static strings:Labels.PreviewSize}" FontSize="20" Margin="0 -8 15 0"
+                               HorizontalAlignment="Center" />
+                    <Slider Name="SliderControl"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            TickFrequency="10"
+                            Minimum="10"
+                            ValueChanged="Slider_OnValueChanged" />
+                    <TextBox Name="CurrentThumbnailSizeControl"
+                             Grid.Column="2"
+                             HorizontalAlignment="Center"
+                             FontSize="20"
+                             VerticalAlignment="Top"
+                             Margin="0 -15 0 0" />
+                    <Button Name="CloseButton"
+                            Grid.Column="3"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0 -20 0 0"
+                            Cursor="Hand"
+                            ToolTip="{x:Static strings:Labels.Close}"
+                            Content="{materialDesign:PackIcon Close}" />
+                </Grid>
+            </DockPanel>
+            <TabControl Name="CategoriesTabControl"
+                        common:TabContent.IsCached="True"
+                        Style="{StaticResource MaterialDesignTabControl}"
+                        MouseUp="CategoriesTabControl_OnMouseUp"
+                        SizeChanged="CategoriesTabControl_OnSizeChanged"
+                        SelectionChanged="CategoriesTabControl_OnSelectionChanged"
+                        SelectedIndex="0">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="imageGallery:ImagesCategoryViewModel">
+                        <TextBlock Text="{Binding CategoryName}" Loaded="TabItemHeaderTextBlock_OnLoaded" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <common:TabContent.Template>
+                    <DataTemplate DataType="imageGallery:ImagesCategoryViewModel">
+                        <reactiveUi:ViewModelViewHost ViewModel="{Binding}" HorizontalContentAlignment="Stretch" />
+                    </DataTemplate>
+                </common:TabContent.Template>
+            </TabControl>
+        </StackPanel>
     </Grid>
 </reactiveUi:ReactiveUserControl>
