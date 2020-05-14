@@ -22,19 +22,13 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("Tom's Toolkit WPF Controls")]
-[assembly: AssemblyDescription("WPF Controls for .NET Framework")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Thomas Ohms")]
-[assembly: AssemblyProduct("Tom's Toolkit")]
-[assembly: AssemblyCopyright("Copyright ©  2020 Thomas Ohms")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly : AssemblyTrademark ("")]
+[assembly : AssemblyCulture ("")]
 
 // Durch Festlegen von ComVisible auf FALSE werden die Typen in dieser Assembly
 // für COM-Komponenten unsichtbar.  Wenn Sie auf einen Typ in dieser Assembly von
 // COM aus zugreifen müssen, sollten Sie das ComVisible-Attribut für diesen Typ auf "True" festlegen.
-[assembly: ComVisible(false)]
+[assembly : ComVisible (false)]
 
 //Um mit dem Erstellen lokalisierbarer Anwendungen zu beginnen, legen Sie
 //<UICulture>ImCodeVerwendeteKultur</UICulture> in der .csproj-Datei
@@ -45,16 +39,14 @@ using System.Windows;
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
-
-[assembly: ThemeInfo(
+[assembly : ThemeInfo (
     ResourceDictionaryLocation.None, //Speicherort der designspezifischen Ressourcenwörterbücher
-                                     //(wird verwendet, wenn eine Ressource auf der Seite nicht gefunden wird,
-                                     // oder in den Anwendungsressourcen-Wörterbüchern nicht gefunden werden kann.)
+    //(wird verwendet, wenn eine Ressource auf der Seite nicht gefunden wird,
+    // oder in den Anwendungsressourcen-Wörterbüchern nicht gefunden werden kann.)
     ResourceDictionaryLocation.SourceAssembly //Speicherort des generischen Ressourcenwörterbuchs
-                                              //(wird verwendet, wenn eine Ressource auf der Seite nicht gefunden wird,
-                                              // designspezifischen Ressourcenwörterbuch nicht gefunden werden kann.)
+    //(wird verwendet, wenn eine Ressource auf der Seite nicht gefunden wird,
+    // designspezifischen Ressourcenwörterbuch nicht gefunden werden kann.)
 )]
-
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
@@ -66,7 +58,4 @@ using System.Windows;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.1.0")]
-[assembly: AssemblyFileVersion("1.0.1.0")]
-[assembly: NeutralResourcesLanguage("de")]
-[assembly: Guid("21CA463A-F26E-48F2-ACAD-FF23100206D1")]
+[assembly : Guid ("21CA463A-F26E-48F2-ACAD-FF23100206D1")]

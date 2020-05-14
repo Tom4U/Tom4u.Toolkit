@@ -26,22 +26,8 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
     public class ImagesCategoryViewModel : AbstractViewModel
     {
         private string categoryName = "";
-        public string CategoryName
-        {
-            get => categoryName;
-            set => this.RaiseAndSetIfChanged(ref categoryName, value);
-        }
 
         private double tabItemHeight = 300;
-
-        public double TabItemHeight
-        {
-            get => tabItemHeight;
-            set => this.RaiseAndSetIfChanged(ref tabItemHeight, value);
-        }
-
-        private SourceCache<ImageViewModel, string> ImagesCache { get; }
-        public IObservableCollection<ImageViewModel> Images { get; }
 
         public ImagesCategoryViewModel()
         {
@@ -53,5 +39,20 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
                 .Bind(Images)
                 .Subscribe();
         }
+
+        public string CategoryName
+        {
+            get => categoryName;
+            set => this.RaiseAndSetIfChanged(ref categoryName, value);
+        }
+
+        public double TabItemHeight
+        {
+            get => tabItemHeight;
+            set => this.RaiseAndSetIfChanged(ref tabItemHeight, value);
+        }
+
+        private SourceCache<ImageViewModel, string> ImagesCache { get; }
+        public IObservableCollection<ImageViewModel> Images { get; }
     }
 }

@@ -1,6 +1,18 @@
-﻿// TabContent.cs, version 1.2
-// The code in this file is Copyright (c) Ivan Krivyakov
-// See http://www.ikriv.com/legal.php for more information
+﻿// Tom4u.Toolkit
+// Copyright (C) 2020  Thomas Ohms
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.ComponentModel;
@@ -9,49 +21,53 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using Tom4u.Toolkit.WpfControls.Strings;
 
+// TabContent.cs, version 1.2
+// The code in this file is Copyright (c) Ivan Krivyakov
+// See http://www.ikriv.com/legal.php for more information
+
 namespace Tom4u.Toolkit.WpfControls.Common
 {
     public static partial class TabContent
     {
         public static readonly DependencyProperty IsCachedProperty = DependencyProperty.RegisterAttached(
-                "IsCached",
-                typeof(bool),
-                typeof(TabContent),
-                new UIPropertyMetadata(false, OnIsCachedChanged));
+            "IsCached",
+            typeof(bool),
+            typeof(TabContent),
+            new UIPropertyMetadata(false, OnIsCachedChanged));
 
         /// <summary>
         ///     Used instead of TabControl.ContentTemplate for cached tabs
         /// </summary>
         public static readonly DependencyProperty TemplateProperty = DependencyProperty.RegisterAttached(
-                "Template",
-                typeof(DataTemplate),
-                typeof(TabContent),
-                new UIPropertyMetadata(null));
+            "Template",
+            typeof(DataTemplate),
+            typeof(TabContent),
+            new UIPropertyMetadata(null));
 
         /// <summary>
         ///     Used instead of TabControl.ContentTemplateSelector for cached tabs
         /// </summary>
         public static readonly DependencyProperty TemplateSelectorProperty = DependencyProperty.RegisterAttached(
-                "TemplateSelector",
-                typeof(DataTemplateSelector),
-                typeof(TabContent),
-                new UIPropertyMetadata(null));
+            "TemplateSelector",
+            typeof(DataTemplateSelector),
+            typeof(TabContent),
+            new UIPropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for InternalTabControl.  This enables animation, styling, binding, etc...
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly DependencyProperty InternalTabControlProperty = DependencyProperty.RegisterAttached(
-                "InternalTabControl",
-                typeof(TabControl),
-                typeof(TabContent),
-                new UIPropertyMetadata(null, OnInternalTabControlChanged));
+            "InternalTabControl",
+            typeof(TabControl),
+            typeof(TabContent),
+            new UIPropertyMetadata(null, OnInternalTabControlChanged));
 
         // Using a DependencyProperty as the backing store for InternalCachedContent.  This enables animation, styling, binding, etc...
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly DependencyProperty InternalCachedContentProperty = DependencyProperty.RegisterAttached(
-                "InternalCachedContent",
-                typeof(ContentControl),
-                typeof(TabContent),
-                new UIPropertyMetadata(null));
+            "InternalCachedContent",
+            typeof(ContentControl),
+            typeof(TabContent),
+            new UIPropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for InternalContentManager.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InternalContentManagerProperty = DependencyProperty.RegisterAttached(
