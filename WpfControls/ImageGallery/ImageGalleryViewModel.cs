@@ -14,26 +14,53 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Input;
+using DynamicData;
+using DynamicData.Binding;
+using ReactiveUI;
 using Tom4u.Toolkit.WpfControls.Common;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public class ImageGalleryViewModel : AbstractViewModel
     {
+        private int maxThumbnailSize = 500;
         public int MaxThumbnailSize
         {
-            get => GetValue(500);
-            set => SetValue(value);
+            get => maxThumbnailSize;
+            set => this.RaiseAndSetIfChanged(ref maxThumbnailSize, value);
         }
 
+        private int currentThumbnailSize = 120;
         public int CurrentThumbnailSize
         {
-            get => GetValue(200);
-            set => SetValue(value);
+            get => currentThumbnailSize;
+            set => this.RaiseAndSetIfChanged(ref currentThumbnailSize, value);
         }
 
-        public ObservableCollection<ImagesCategoryViewModel> Categories =>
-            GetValue(new ObservableCollection<ImagesCategoryViewModel>());
+        private SourceCache<ImagesCategoryViewModel, string> CategoriesCache { get; }
+        public IObservableCollection<ImagesCategoryViewModel> Categories { get; }
+
+        public ReactiveCommand<Unit, Unit> CloseGallery { get; }
+
+        public ImageGalleryViewModel()
+        {
+            CategoriesCache = new SourceCache<ImagesCategoryViewModel, string>(icvm => icvm.CategoryName);
+            Categories = new ObservableCollectionExtended<ImagesCategoryViewModel>();
+
+            CategoriesCache.Connect()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Bind(Categories)
+                .Subscribe();
+
+            CloseGallery = ReactiveCommand.Create(() => {});
+        }
     }
 }

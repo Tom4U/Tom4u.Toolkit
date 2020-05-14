@@ -18,10 +18,12 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using ReactiveUI;
+using Splat;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
-    public class EmptyStringImageSourceConverter : IValueConverter
+    public class EmptyStringImageSourceConverter : IValueConverter, IBindingTypeConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -36,6 +38,27 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Binding.DoNothing;
+        }
+
+        public int GetAffinityForObjects(Type fromType, Type toType)
+        {
+            return fromType == typeof(string) ? 0 : 1;
+        }
+
+        public bool TryConvert(object from, Type toType, object conversionHint, out object result)
+        {
+            try
+            {
+                result = Convert(from, toType, conversionHint, CultureInfo.CurrentCulture);
+            }
+            catch (Exception exception)
+            {
+                this.Log().Warn(exception, $"Couldn't convert object to type:  {toType}");
+                result = "";
+                return false;
+            }
+
+            return true;
         }
     }
 }

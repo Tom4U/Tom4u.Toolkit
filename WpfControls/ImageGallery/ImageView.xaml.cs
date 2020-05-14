@@ -14,38 +14,57 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Reactive.Disposables;
 using System.Windows;
+using ReactiveUI;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public partial class ImageView
     {
-        private static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
-            nameof(ViewModel),
-            typeof(ImageViewModel),
-            typeof(ImageView));
+        //private static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+        //    nameof(ViewModel),
+        //    typeof(ImageViewModel),
+        //    typeof(ImageView));
 
         public ImageView()
         {
-            SetupViewModel(new ImageViewModel());
-        }
-
-        public ImageView(ImageViewModel viewModel)
-        {
-            SetupViewModel(viewModel);
-        }
-
-        public ImageViewModel ViewModel
-        {
-            get => (ImageViewModel)GetValue(ViewModelProperty);
-            set => SetValue(ViewModelProperty, value);
-        }
-
-        private void SetupViewModel(ImageViewModel viewModel)
-        {
             InitializeComponent();
-            ViewModel = viewModel;
-            DataContext = ViewModel;
+            ViewModel = new ImageViewModel();
+
+            this.WhenActivated(disposables =>
+            {
+                this.Bind(ViewModel,
+                        vm => vm.Path,
+                        view => view.ImageControl.Source)
+                    .DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                        vm => vm.ImageSize,
+                        view => view.ImageControl.Width)
+                    .DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                        vm => vm.ImageSize,
+                        view => view.ImageControl.Height)
+                    .DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                        vm => vm.Tags,
+                        view => view.Tag)
+                    .DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                        vm => vm.Title,
+                        view => view.ImageTitleControl.Text)
+                    .DisposeWith(disposables);
+            });
         }
+
+        //public ImageViewModel ViewModel
+        //{
+        //    get => (ImageViewModel)GetValue(ViewModelProperty);
+        //    set => SetValue(ViewModelProperty, value);
+        //}
     }
 }
