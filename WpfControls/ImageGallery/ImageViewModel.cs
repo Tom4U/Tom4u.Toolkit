@@ -14,37 +14,43 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Reactive;
 using System.Windows.Input;
+using ReactiveUI;
 using Tom4u.Toolkit.WpfControls.Common;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public class ImageViewModel : AbstractViewModel
     {
+        private string title = "";
         public string Title
         {
-            get => GetValue("");
-            set => SetValue(value);
+            get => title;
+            set => this.RaiseAndSetIfChanged(ref title, value);
         }
 
+        private string path = "";
         public string Path
         {
-            get => GetValue("");
-            set => SetValue(value);
+            get => path;
+            set => this.RaiseAndSetIfChanged(ref path, value);
         }
 
+        private string tags = "";
         public string Tags
         {
-            get => GetValue("");
-            set => SetValue(value);
+            get => tags;
+            set => this.RaiseAndSetIfChanged(ref tags, value);
         }
 
+        private int imageSize = 150;
         public int ImageSize
         {
-            get => GetValue(150);
-            set => SetValue(value);
+            get => imageSize;
+            set => this.RaiseAndSetIfChanged(ref imageSize, value);
         }
 
-        public ICommand SelectImage { get; set; }
+        public ReactiveCommand<ImageViewModel, Unit> SelectImage { get; set; }
     }
 }

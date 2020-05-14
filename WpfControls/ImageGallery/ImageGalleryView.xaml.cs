@@ -14,92 +14,158 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using MaterialDesignThemes.Wpf;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reactive.Disposables;
+using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
+using MaterialDesignThemes.Wpf;
+using ReactiveUI;
+using Splat;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public partial class ImageGalleryView
     {
+        private bool headerLoaded;
+
+        //public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+        //    nameof(ViewModel),
+        //    typeof(ImageGalleryViewModel),
+        //    typeof(ImageGalleryView));
+
+        public double TabItemHeaderHeight { get; private set; }
+
         public ImageGalleryView()
         {
-            SetupView(new ImageGalleryViewModel());
+            SetupView();
         }
 
-        public ImageGalleryView(ImageGalleryViewModel viewModel)
-        {
-            SetupView(viewModel);
-        }
-
-        private ImageGalleryViewModel ViewModel { get; set; }
-
-        private int DialogWidth
-        {
-            get
-            {
-                var parentWidth = GalleryDialogHost.ActualWidth;
-                return (int)(parentWidth - 150);
-            }
-        }
-
-        private int DialogHeight
-        {
-            get
-            {
-                var parentHeight = GalleryDialogHost.ActualHeight;
-                return (int)(parentHeight - 200);
-            }
-        }
+        //public ImageGalleryViewModel ViewModel
+        //{
+        //    get => (ImageGalleryViewModel) GetValue(ViewModelProperty); 
+        //    set => SetValue(ViewModelProperty, value);
+        //}
 
         public event EventHandler GalleryClosed;
         public event EventHandler<ImageViewModel> ImageClicked;
+        //public event EventHandler<TabItem> CategoryTabItemLoaded;
 
-        private void SetupView(ImageGalleryViewModel viewModel)
+        private void SetupView()
         {
+            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
+            Locator.CurrentMutable.RegisterConstant(
+                new EmptyStringImageSourceConverter(),
+                typeof(IBindingTypeConverter));
+
             InitializeComponent();
-            ViewModel = viewModel;
-            DataContext = ViewModel;
-            SizeChanged += (sender, args) =>
+            ViewModel = new ImageGalleryViewModel();
+
+            this.WhenActivated(disposables =>
             {
-                CategoriesTabControl.Visibility = Visibility.Collapsed;
-                CategoriesTabControl.Items.Clear();
-                CategoriesTabControl_OnLoaded(this, null);
-                CategoriesTabControl.Visibility = Visibility.Visible;
-            };
+                this.OneWayBind(ViewModel,
+                        vm => vm.MaxThumbnailSize,
+                        view => view.SliderControl.Maximum)
+                    .DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                        vm => vm.CurrentThumbnailSize,
+                        view => view.SliderControl.Value)
+                    .DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                        vm => vm.CurrentThumbnailSize,
+                        view => view.CurrentThumbnailSizeControl.Text)
+                    .DisposeWith(disposables);
+
+                this.Bind(ViewModel,
+                        vm => vm.Categories,
+                        view => view.CategoriesTabControl.ItemsSource)
+                    .DisposeWith(disposables);
+
+                this.BindCommand(ViewModel,
+                        vm => vm.CloseGallery,
+                        view => view.CloseButton)
+                    .DisposeWith(disposables);
+
+                ViewModel.CloseGallery.Subscribe(unit => GalleryClosed?.Invoke(this, EventArgs.Empty));
+            });
+
+            //SizeChanged += (sender, args) =>
+            //{
+            //    CategoriesTabControl.Visibility = Visibility.Collapsed;
+            //    CategoriesTabControl.Items.Clear();
+            //    CategoriesTabControl_OnLoaded(this, null);
+            //    CategoriesTabControl.Visibility = Visibility.Visible;
+            //};
+
+            //CategoryTabItemLoaded += (sender, item) =>
+            //{
+            //    CategoriesTabControl.Items.Add(item);
+            //};
         }
 
-        private void GalleryDialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventargs)
-        {
-            GalleryClosed?.Invoke(this, EventArgs.Empty);
-        }
+        //private void CategoriesTabControl_OnLoaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (CategoriesTabControl.Items.Count > 0)
+        //    {
+        //        return;
+        //    }
 
-        private void CategoriesTabControl_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (CategoriesTabControl.Items.Count > 0)
-            {
-                return;
-            }
+        //    var stopwatch = new Stopwatch();
+        //    stopwatch.Start();
+        //    var categories = ViewModel.Categories.ToArray();
+        //    Debug.WriteLine("Adding categories to tabs");
 
-            foreach (var category in ViewModel.Categories)
-            {
-                var tabItem = new TabItem
-                {
-                    Header = category.CategoryName,
-                    Content = new ImagesCategoryView(category)
-                    {
-                        Width = DialogWidth,
-                        Height = DialogHeight - ActionDock.ActualHeight - 50
-                    }
-                };
+        //    var firstTabItem = CategoryToTabItem(categories.First(), true);
 
-                CategoriesTabControl.Items.Add(tabItem);
-            }
-        }
+        //    CategoryTabItemLoaded?.Invoke(this, firstTabItem);
+        //    Debug.WriteLine($"First tab created after {stopwatch.Elapsed.Seconds} seconds");
+
+        //    AddCategoriesToTabControl(categories.Skip(1));
+
+        //    stopwatch.Stop();
+        //    Debug.WriteLine($"Adding categories in {stopwatch.Elapsed.Seconds} seconds");
+        //}
+
+        //private void AddCategoriesToTabControl(IEnumerable<ImagesCategoryViewModel> categories)
+        //{
+        //    foreach (var category in categories)
+        //    {
+        //        var tabItem = CategoryToTabItem(category, false);
+        //        CategoryTabItemLoaded?.Invoke(this, tabItem);
+        //    }
+        //}
+
+        //private TabItem CategoryToTabItem(ImagesCategoryViewModel category, bool isSelected)
+        //{
+        //    var tabItem = new TabItem
+        //    {
+        //        Header = category.CategoryName,
+        //        Content = new ImagesCategoryView(category)
+        //        {
+        //            Width = GalleryPanel.ActualWidth - 60,
+        //            Height = GalleryPanel.ActualHeight - ActionDock.Height - 200
+        //        },
+        //        IsSelected = isSelected
+        //    };
+        //    return tabItem;
+        //}
 
         private void Slider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (e.OldValue.Equals(e.NewValue)) return;
+
+            UpdateImageSizes((int)e.NewValue);
+        }
+
+        private void UpdateImageSizes(int newSize)
         {
             if (ViewModel == null)
             {
@@ -110,7 +176,7 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
             {
                 foreach (var image in category.Images)
                 {
-                    image.ImageSize = (int)e.NewValue;
+                    image.ImageSize = newSize;
                 }
             }
         }
@@ -125,6 +191,50 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
             }
 
             ImageClicked?.Invoke(this, (ImageViewModel)source.DataContext);
+        }
+
+        private void CloseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            GalleryClosed?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void TabItemHeaderTextBlock_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var textBlock = (TextBlock)sender;
+
+            TabItemHeaderHeight = textBlock.ActualHeight;
+            UpdateTabItemHeight();
+            headerLoaded = true;
+        }
+
+        private void UpdateTabItemHeight()
+        {
+            if (CategoriesTabControl.Items.Count == 0 || !headerLoaded) return;
+
+            if (CategoriesTabControl.SelectedIndex < 0)
+                CategoriesTabControl.SelectedIndex = 0;
+
+            var categoryViewModel = (ImagesCategoryViewModel) CategoriesTabControl.SelectedItem;
+            var realHeight = GalleryPanel.ActualHeight - ActionDock.ActualHeight - TabItemHeaderHeight - 50;
+
+            categoryViewModel.TabItemHeight = realHeight;
+        }
+
+        private void GalleryPanel_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!headerLoaded) return;
+            UpdateTabItemHeight();
+        }
+
+        private void CategoriesTabControl_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!e.WidthChanged) return;
+            UpdateTabItemHeight();
+        }
+
+        private void CategoriesTabControl_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateTabItemHeight();
         }
     }
 }

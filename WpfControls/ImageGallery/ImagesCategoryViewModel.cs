@@ -14,19 +14,44 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.ObjectModel;
+using System;
+using System.Reactive.Linq;
+using DynamicData;
+using DynamicData.Binding;
+using ReactiveUI;
 using Tom4u.Toolkit.WpfControls.Common;
 
 namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public class ImagesCategoryViewModel : AbstractViewModel
     {
+        private string categoryName = "";
         public string CategoryName
         {
-            get => GetValue("");
-            set => SetValue(value);
+            get => categoryName;
+            set => this.RaiseAndSetIfChanged(ref categoryName, value);
         }
 
-        public ObservableCollection<ImageViewModel> Images => GetValue(new ObservableCollection<ImageViewModel>());
+        private double tabItemHeight = 300;
+
+        public double TabItemHeight
+        {
+            get => tabItemHeight;
+            set => this.RaiseAndSetIfChanged(ref tabItemHeight, value);
+        }
+
+        private SourceCache<ImageViewModel, string> ImagesCache { get; }
+        public IObservableCollection<ImageViewModel> Images { get; }
+
+        public ImagesCategoryViewModel()
+        {
+            ImagesCache = new SourceCache<ImageViewModel, string>(ivm => ivm.Path);
+            Images = new ObservableCollectionExtended<ImageViewModel>();
+
+            ImagesCache.Connect()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Bind(Images)
+                .Subscribe();
+        }
     }
 }

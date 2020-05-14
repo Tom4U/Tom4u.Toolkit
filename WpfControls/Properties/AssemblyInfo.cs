@@ -69,3 +69,4 @@ using System.Windows;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: NeutralResourcesLanguage("de")]
+[assembly: Guid("21CA463A-F26E-48F2-ACAD-FF23100206D1")]

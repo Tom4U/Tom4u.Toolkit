@@ -7,14 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetStandardLibrary", "NetSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControls", "WpfControls\WpfControls.csproj", "{3722F313-9452-4F31-B692-C23C0C27ED43}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{026E25B9-BE11-431D-9AFE-E3B19E3EDB31}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE.md = LICENSE.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{40F263E4-D3F6-426D-8F20-2C4962589151}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControls.Demo", "WpfControls.Demo\WpfControls.Demo.csproj", "{39AE4CB6-D13C-4ECA-8B70-1B7106B9DEA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7D555889-2FBA-4E23-8A21-1F89C1198926}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		LICENSE.md = LICENSE.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

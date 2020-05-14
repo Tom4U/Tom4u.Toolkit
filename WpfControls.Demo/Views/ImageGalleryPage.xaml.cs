@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using DynamicData;
 using Tom4u.Toolkit.WpfControls.ImageGallery;
 
 namespace WpfControls.Demo.Views
@@ -28,7 +29,8 @@ namespace WpfControls.Demo.Views
         public ImageGalleryPage()
         {
             InitializeComponent();
-            var gallery = new ImageGalleryView(GetSimulatedViewModel());
+            var gallery = new ImageGalleryView();
+            gallery.ViewModel = GetSimulatedViewModel();
             gallery.ImageClicked += ImageGalleryView_OnImageClicked;
             gallery.GalleryClosed += ImageGalleryView_OnGalleryClosed;
             MainGrid.Children.Add(gallery);
@@ -53,7 +55,7 @@ namespace WpfControls.Demo.Views
         {
             var viewModel = new ImageGalleryViewModel();
 
-            for (var i = 1; i < 3; i++)
+            for (var i = 1; i < 5; i++)
             {
                 viewModel.Categories.Add(GetSimulatedCategory($"Category {i}", viewModel.CurrentThumbnailSize));
             }
@@ -64,16 +66,10 @@ namespace WpfControls.Demo.Views
         private static ImagesCategoryViewModel GetSimulatedCategory(string categoryName, int defaultImageSize)
         {
             var viewModel = new ImagesCategoryViewModel { CategoryName = categoryName };
-            var images = new List<ImageViewModel>();
 
-            for (var i = 1; i < 10; i++)
+            for (var i = 1; i < 30; i++)
             {
                 var image = GetSimulatedImage(defaultImageSize, $"Image{i}");
-                images.Add(image);
-            }
-
-            foreach (var image in images)
-            {
                 viewModel.Images.Add(image);
             }
 

@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AbstractViewModel.cs" />
+    <Compile Include="Common\TabContent.ContentManager.cs" />
+    <Compile Include="Common\TabContent.cs" />
     <Compile Include="ImageGallery\EmptyStringImageSourceConverter.cs" />
     <Compile Include="ImageGallery\ImageGalleryView.xaml.cs">
       <DependentUpon>ImageGalleryView.xaml</DependentUpon>
@@ -86,6 +88,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Strings\ErrorMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Strings\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,6 +101,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\ErrorMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings\Labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -144,6 +155,15 @@
       <Version>5.5.1</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="ReactiveUI">
+      <Version>11.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="ReactiveUI.WPF">
+      <Version>11.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reactive">
+      <Version>4.4.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

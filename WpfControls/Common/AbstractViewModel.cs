@@ -17,38 +17,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ReactiveUI;
 using Tom4u.Toolkit.WpfControls.Properties;
 
 namespace Tom4u.Toolkit.WpfControls.Common
 {
-    public abstract class AbstractViewModel : INotifyPropertyChanged
+    public abstract class AbstractViewModel : ReactiveObject
     {
-        private readonly Dictionary<string, object> properties = new Dictionary<string, object>();
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected T GetValue<T>(T defaultValue = default, [CallerMemberName] string property = "")
-        {
-            if (properties.ContainsKey(property))
-            {
-                return (T)properties[property];
-            }
-
-            SetValue(defaultValue, property);
-
-            return defaultValue;
-        }
-
-        protected void SetValue<T>(T value, [CallerMemberName] string property = "")
-        {
-            properties[property] = value;
-            OnPropertyChanged(property);
-        }
-
-        [NotifyPropertyChangedInvocator]
-        // ReSharper disable once VirtualMemberNeverOverridden.Global
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }
