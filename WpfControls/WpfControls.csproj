@@ -24,8 +24,8 @@
     <Description>WPF Controls for .NET Framework.</Description>
     <Copyright>Copyright ©  2020 Thomas Ohms</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Tom4U/toolkit/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Tom4U/toolkit/</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Tom4U/Tom4u.Toolkit/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Tom4U/Tom4u.Toolkit/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch>master</RepositoryBranch>
     <PackageTags>tom4u toolkit developer wpf</PackageTags>
