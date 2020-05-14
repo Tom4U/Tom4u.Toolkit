@@ -16,14 +16,14 @@
     </NuGetPackageImportStamp>
     <PackageId>Tom4u.Toolkit.WpfControls</PackageId>
     <PackageOutputPath>$(OutputPath)</PackageOutputPath>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Thomas Ohms</Authors>
     <Company></Company>
     <Title>Tom's Toolkit WPF Controls</Title>
     <Product>Tom's Toolkit</Product>
     <Description>WPF Controls for .NET Framework.</Description>
     <Copyright>Copyright ©  2020 Thomas Ohms</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Tom4U/toolkit/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Tom4U/toolkit/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -32,6 +32,7 @@
     <NeutralLanguage>de</NeutralLanguage>
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <FileVersion>1.0.2.0</FileVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
