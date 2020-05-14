@@ -8,10 +8,8 @@
     <Product>Tom's Toolkit .NET Standard</Product>
     <Description>Library with extensions, helpers and other shared code for different .NET platforms.</Description>
     <Copyright>Copyright ©  2020 Thomas Ohms</Copyright>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>de</NeutralLanguage>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Default.snk</AssemblyOriginatorKeyFile>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
