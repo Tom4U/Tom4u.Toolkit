@@ -21,11 +21,6 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
 {
     public partial class ImageView
     {
-        //private static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
-        //    nameof(ViewModel),
-        //    typeof(ImageViewModel),
-        //    typeof(ImageView));
-
         public ImageView()
         {
             InitializeComponent();
@@ -59,11 +54,5 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
                     .DisposeWith(disposables);
             });
         }
-
-        //public ImageViewModel ViewModel
-        //{
-        //    get => (ImageViewModel)GetValue(ViewModelProperty);
-        //    set => SetValue(ViewModelProperty, value);
-        //}
     }
 }
