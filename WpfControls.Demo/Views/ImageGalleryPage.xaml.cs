@@ -15,11 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using DynamicData;
 using Tom4u.Toolkit.WpfControls.ImageGallery;
 
 namespace WpfControls.Demo.Views
@@ -29,24 +27,20 @@ namespace WpfControls.Demo.Views
         public ImageGalleryPage()
         {
             InitializeComponent();
-            var gallery = new ImageGalleryView();
-            gallery.ViewModel = GetSimulatedViewModel();
+            var gallery = new ImageGalleryView {ViewModel = GetSimulatedViewModel()};
             gallery.ImageClicked += ImageGalleryView_OnImageClicked;
             gallery.GalleryClosed += ImageGalleryView_OnGalleryClosed;
             MainGrid.Children.Add(gallery);
         }
 
-        private void ImageGalleryView_OnImageClicked(object sender, ImageViewModel e)
+        private static void ImageGalleryView_OnImageClicked(object sender, ImageViewModel e)
         {
             MessageBox.Show($"{e.Title} clicked");
         }
 
         private void ImageGalleryView_OnGalleryClosed(object sender, EventArgs e)
         {
-            if (NavigationService == null || !NavigationService.CanGoBack)
-            {
-                return;
-            }
+            if (NavigationService == null || !NavigationService.CanGoBack) return;
 
             NavigationService?.GoBack();
         }
@@ -56,16 +50,14 @@ namespace WpfControls.Demo.Views
             var viewModel = new ImageGalleryViewModel();
 
             for (var i = 1; i < 5; i++)
-            {
                 viewModel.Categories.Add(GetSimulatedCategory($"Category {i}", viewModel.CurrentThumbnailSize));
-            }
 
             return viewModel;
         }
 
         private static ImagesCategoryViewModel GetSimulatedCategory(string categoryName, int defaultImageSize)
         {
-            var viewModel = new ImagesCategoryViewModel { CategoryName = categoryName };
+            var viewModel = new ImagesCategoryViewModel {CategoryName = categoryName};
 
             for (var i = 1; i < 30; i++)
             {

@@ -11,8 +11,7 @@
                                 xmlns:common="clr-namespace:Tom4u.Toolkit.WpfControls.Common"
                                 mc:Ignorable="d"
                                 d:DesignHeight="450" d:DesignWidth="800"
-                                d:DataContext="{d:DesignInstance Type=imageGallery:ImageGalleryViewModel, IsDesignTimeCreatable=True}"
-                                Name="ControlFrame">
+                                d:DataContext="{d:DesignInstance Type=imageGallery:ImageGalleryViewModel, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -63,7 +62,7 @@
                         SelectedIndex="0">
                 <TabControl.ItemTemplate>
                     <DataTemplate DataType="imageGallery:ImagesCategoryViewModel">
-                        <TextBlock Text="{Binding CategoryName}" Loaded="TabItemHeaderTextBlock_OnLoaded" />
+                        <TextBlock Cursor="Hand" Text="{Binding CategoryName}" Loaded="TabItemHeaderTextBlock_OnLoaded" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
                 <common:TabContent.Template>
