@@ -63,7 +63,7 @@
                         SelectedIndex="0">
                 <TabControl.ItemTemplate>
                     <DataTemplate DataType="imageGallery:ImagesCategoryViewModel">
-                        <TextBlock Text="{Binding CategoryName}" Loaded="TabItemHeaderTextBlock_OnLoaded" />
+                        <TextBlock Cursor="Hand" Text="{Binding CategoryName}" Loaded="TabItemHeaderTextBlock_OnLoaded" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
                 <common:TabContent.Template>
