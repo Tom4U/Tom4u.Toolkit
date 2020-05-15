@@ -6,8 +6,8 @@ All code and packages will be published under der GNU General Public License v3 
 If you require a commercial license you can contact me for details.
 
 ## Currently available
-### WPF .NET Framework
+### WPF .NET Framework Controls
 **1. Image Gallery**  
-   A simple image gallery with tabs for categories and callbacks if an image is clicked.  
+   A simple image gallery with tabs for categories and callbacks if an image is clicked or gallery should be closed.  
    Also the thumbnail size can be changed by the user.  
    The gallery uses Material Design for a unified UI.
