@@ -18,6 +18,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 using ReactiveUI;
 using Splat;
 
@@ -27,7 +28,11 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
     {
         public int GetAffinityForObjects(Type fromType, Type toType)
         {
-            return fromType == typeof(string) ? 0 : 1;
+            var isStringSource = typeof(string) == fromType;
+            var isImageSourceTarget = typeof(ImageSource) == toType;
+            var canConvert = isStringSource && isImageSourceTarget;
+
+            return canConvert ? 1 : 0;
         }
 
         public bool TryConvert(object from, Type toType, object conversionHint, out object result)

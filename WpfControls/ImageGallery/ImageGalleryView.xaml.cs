@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Reflection;
 using System.Windows;
@@ -67,7 +68,7 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
                         view => view.CurrentThumbnailSizeControl.Text)
                     .DisposeWith(disposables);
 
-                this.Bind(ViewModel,
+                this.OneWayBind(ViewModel,
                         vm => vm.Categories,
                         view => view.CategoriesTabControl.ItemsSource)
                     .DisposeWith(disposables);
