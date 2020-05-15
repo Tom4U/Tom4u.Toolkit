@@ -34,23 +34,11 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
             SetupView();
         }
 
-        //public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
-        //    nameof(ViewModel),
-        //    typeof(ImageGalleryViewModel),
-        //    typeof(ImageGalleryView));
-
-        public double TabItemHeaderHeight { get; private set; }
-
-        //public ImageGalleryViewModel ViewModel
-        //{
-        //    get => (ImageGalleryViewModel) GetValue(ViewModelProperty); 
-        //    set => SetValue(ViewModelProperty, value);
-        //}
+        private double TabItemHeaderHeight { get; set; }
 
         public event EventHandler GalleryClosed;
 
         public event EventHandler<ImageViewModel> ImageClicked;
-        //public event EventHandler<TabItem> CategoryTabItemLoaded;
 
         private void SetupView()
         {
@@ -91,67 +79,7 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
 
                 ViewModel.CloseGallery.Subscribe(unit => GalleryClosed?.Invoke(this, EventArgs.Empty));
             });
-
-            //SizeChanged += (sender, args) =>
-            //{
-            //    CategoriesTabControl.Visibility = Visibility.Collapsed;
-            //    CategoriesTabControl.Items.Clear();
-            //    CategoriesTabControl_OnLoaded(this, null);
-            //    CategoriesTabControl.Visibility = Visibility.Visible;
-            //};
-
-            //CategoryTabItemLoaded += (sender, item) =>
-            //{
-            //    CategoriesTabControl.Items.Add(item);
-            //};
         }
-
-        //private void CategoriesTabControl_OnLoaded(object sender, RoutedEventArgs e)
-        //{
-        //    if (CategoriesTabControl.Items.Count > 0)
-        //    {
-        //        return;
-        //    }
-
-        //    var stopwatch = new Stopwatch();
-        //    stopwatch.Start();
-        //    var categories = ViewModel.Categories.ToArray();
-        //    Debug.WriteLine("Adding categories to tabs");
-
-        //    var firstTabItem = CategoryToTabItem(categories.First(), true);
-
-        //    CategoryTabItemLoaded?.Invoke(this, firstTabItem);
-        //    Debug.WriteLine($"First tab created after {stopwatch.Elapsed.Seconds} seconds");
-
-        //    AddCategoriesToTabControl(categories.Skip(1));
-
-        //    stopwatch.Stop();
-        //    Debug.WriteLine($"Adding categories in {stopwatch.Elapsed.Seconds} seconds");
-        //}
-
-        //private void AddCategoriesToTabControl(IEnumerable<ImagesCategoryViewModel> categories)
-        //{
-        //    foreach (var category in categories)
-        //    {
-        //        var tabItem = CategoryToTabItem(category, false);
-        //        CategoryTabItemLoaded?.Invoke(this, tabItem);
-        //    }
-        //}
-
-        //private TabItem CategoryToTabItem(ImagesCategoryViewModel category, bool isSelected)
-        //{
-        //    var tabItem = new TabItem
-        //    {
-        //        Header = category.CategoryName,
-        //        Content = new ImagesCategoryView(category)
-        //        {
-        //            Width = GalleryPanel.ActualWidth - 60,
-        //            Height = GalleryPanel.ActualHeight - ActionDock.Height - 200
-        //        },
-        //        IsSelected = isSelected
-        //    };
-        //    return tabItem;
-        //}
 
         private void Slider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -178,11 +106,6 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
             ImageClicked?.Invoke(this, (ImageViewModel) source.DataContext);
         }
 
-        private void CloseButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            GalleryClosed?.Invoke(this, EventArgs.Empty);
-        }
-
         private void TabItemHeaderTextBlock_OnLoaded(object sender, RoutedEventArgs e)
         {
             var textBlock = (TextBlock) sender;
@@ -202,13 +125,6 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
             var realHeight = GalleryPanel.ActualHeight - ActionDock.ActualHeight - TabItemHeaderHeight - 50;
 
             categoryViewModel.TabItemHeight = realHeight;
-        }
-
-        private void GalleryPanel_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!headerLoaded) return;
-
-            UpdateTabItemHeight();
         }
 
         private void CategoriesTabControl_OnSizeChanged(object sender, SizeChangedEventArgs e)

@@ -15,7 +15,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <imageGallery:EmptyStringImageSourceConverter x:Key="EmptyStringConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <materialDesign:Card Margin="10" Padding="10 10 10 0" Cursor="Hand" HorizontalAlignment="Left">
