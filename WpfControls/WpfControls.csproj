@@ -16,7 +16,7 @@
     </NuGetPackageImportStamp>
     <PackageId>Tom4u.Toolkit.WpfControls</PackageId>
     <PackageOutputPath>$(OutputPath)</PackageOutputPath>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>Thomas Ohms</Authors>
     <Company></Company>
     <Title>Tom's Toolkit WPF Controls</Title>
@@ -30,8 +30,8 @@
     <RepositoryBranch>master</RepositoryBranch>
     <PackageTags>tom4u toolkit developer wpf</PackageTags>
     <NeutralLanguage>de</NeutralLanguage>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
-    <FileVersion>1.0.4.0</FileVersion>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
