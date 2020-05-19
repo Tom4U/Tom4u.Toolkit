@@ -43,7 +43,7 @@ namespace Tom4u.Toolkit.WpfControls.ImageGallery
 
         private void SetupView()
         {
-            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
+            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetAssembly(typeof(ImageGalleryView)));
             Locator.CurrentMutable.RegisterConstant(
                 new EmptyStringImageSourceConverter(),
                 typeof(IBindingTypeConverter));
